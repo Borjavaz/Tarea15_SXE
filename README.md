@@ -112,3 +112,95 @@ Configuro el archivo: addons/dc_bebidas/security/ir.model.access.csv
 
 <img width="1366" height="385" alt="image" src="https://github.com/user-attachments/assets/abd093e5-0100-435d-a374-225fc650a0a0" />
 
+## 5. Definir Vistas y Menús
+
+En el archivo: addons/dc_bebidas/views/bebidas_views.xml
+
+```bash
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="zzz_bebidas_view_tree" model="ir.ui.view">
+        <field name="name">dc_bebidas.zzz_bebidas.list</field>
+        <field name="model">dc_bebidas.zzz_bebidas</field>
+        <field name="arch" type="xml">
+            <list string="Recomendación de Bebidas">
+                <field name="alumno"/>
+                <field name="nivel_suenio"/>
+                <field name="bebida_recomendado"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="zzz_bebidas_view_form" model="ir.ui.view">
+        <field name="name">dc_bebidas.zzz_bebidas.form</field>
+        <field name="model">dc_bebidas.zzz_bebidas</field>
+        <field name="arch" type="xml">
+            <form string="Nivel de Sueño y Bebida">
+                <sheet>
+                    <group>
+                        <field name="alumno"/>
+                        <field name="nivel_suenio" widget="integer"/>
+                    </group>
+                    <group>
+                        <field name="bebida_recomendado"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="zzz_bebidas_action" model="ir.actions.act_window">
+        <field name="name">Recomendador de Bebidas</field>
+        <field name="res_model">dc_bebidas.zzz_bebidas</field>
+        <field name="view_mode">list,form</field> <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crea un nuevo registro para recomendar una bebida.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_dc_bebidas_root"
+        name="Daniel Castelao"
+        sequence="100"/>
+
+    <menuitem
+        id="menu_bebidas_recomendadas"
+        name="Bebidas por Sueño"
+        parent="menu_dc_bebidas_root"
+        action="zzz_bebidas_action"
+        sequence="10"/>
+
+</odoo>
+```
+## 6. Instalación y Prueba
+
+#### Lo primero que hacemos es reiniciar el contenedor con el siguiente comando:
+
+```bash
+docker compose restart web
+```
+
+<img width="809" height="123" alt="image" src="https://github.com/user-attachments/assets/8e725bda-e96d-42db-8b0a-1b7a76b3a608" />
+
+### A continuación activo el modo desarrollador
+
+<img width="1301" height="342" alt="image" src="https://github.com/user-attachments/assets/54ffcd05-80ba-4018-8d2a-76438f33fbe0" />
+
+### Actualización de los modulos
+
+<img width="1300" height="470" alt="image" src="https://github.com/user-attachments/assets/20b4cedb-e305-48b0-804f-efc39ffe105c" />
+
+### Busqueda e instalación del modulo creado:
+`Bebidas para Alumnos Daniel Castelao`
+
+<img width="1300" height="304" alt="image" src="https://github.com/user-attachments/assets/44df760d-11f2-479a-8c0c-fc010e39968f" />
+
+### Interfaz al introducir nuevos alumnos:
+
+<img width="1301" height="323" alt="image" src="https://github.com/user-attachments/assets/81bd9fdd-2d5b-40f5-b3af-ec40a0e777f4" />
+
+
+### Resultado al insertar dos alumnos:
+
+<img width="1301" height="275" alt="image" src="https://github.com/user-attachments/assets/03683b05-0d09-4c02-a4a6-667b59e17572" />
